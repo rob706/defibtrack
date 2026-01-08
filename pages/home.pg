@@ -1,0 +1,97 @@
+<?php
+
+
+
+$fromd = date("Y-m-d H:i:s", strtotime(date("Y-m-d"))-(60*60*24*7));
+
+$aed = $conn->query("
+  select *
+  from
+    aed_machines
+  order by aed_assettag asc
+");
+?>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Current Defibs Registered</h1>
+  <?php /*<div class="btn-group me-2">
+    <button type="button" class="btn btn-sm btn-outline-secondary"><a class="btn btn-sm" href="/summary.htm">All Bookings</a></button>
+    <button type="button" class="btn btn-sm btn-outline-secondary"><a class="btn btn-sm" href="/activities.htm">Just Activities</a></button>
+    <button type="button" class="btn btn-sm btn-outline-secondary"><a class="btn btn-sm" href="/visitors.htm">Just Visitors</a></button>
+  </div>*/ ?>
+</div>
+<div class="table-responsive">
+<table width="100%" class="table table-striped table-sm">
+  <tr class="tblhead">
+    <td><b>Location</b></td>
+    <td><b>What3Words</b></td>
+    <td><b>Condition</b></td>
+    <td><b>Availability</b></td>
+    <td><b>Signage</b></td>
+    <td><b>Make</b></td>
+    <td><b>Model</b></td>
+    <td><b>AED Asset Tag</b></td>
+    <td><b>CE Mark</b></td>
+    <td><b>Serial Number</b></td>
+    <td><b>Battery Status</b></td>
+    <td><b>Manufacture Date</b></td>
+    <td><b>Registered on App</b></td>
+    <td><b>Box Locked</b></td>
+    <td><b>Box Asset Tag</b></td>
+    <td><b>Box Access Code</b></td>
+    <td><b>Box Power</b></td>
+    <td><b>Other Info</b></td>
+    <td><b>Logged By</b></td>
+  </tr>
+  <?php
+  $nr = $aed->num_rows;
+  if($nr >= 1 ){
+    foreach($aed as $b){
+
+      $manufacturedate = date("Y-m-d", strtotime($b['aed_manufacturedate']));
+
+      echo"<tr class=\"data\">
+        <td>".$b['aed_location'];
+        if(file_exists("../images/".$b['aed_id']."_location.jpg")) echo "<br><a href=\"/images/".$b['aed_id']."_location.jpg\" target=\"_blank\">View Location</a>";
+        if(file_exists("../images/".$b['aed_id']."_location.jpeg")) echo "<br><a href=\"/images/".$b['aed_id']."_location.jpg\" target=\"_blank\">View Location</a>";
+        if(file_exists("../images/".$b['aed_id']."_location.png")) echo "<br><a href=\"/images/".$b['aed_id']."_location.jpg\" target=\"_blank\">View Location</a>";
+        echo "</td>
+        <td>".$b['aed_w3w']."</td>
+        <td>".$b['aed_condition'];
+        if(file_exists("../images/".$b['aed_id']."_condition.jpg")) echo "<br><a href=\"/images/".$b['aed_id']."_condition.jpg\" target=\"_blank\">View Location</a>";
+        if(file_exists("../images/".$b['aed_id']."_condition.jpeg")) echo "<br><a href=\"/images/".$b['aed_id']."_condition.jpg\" target=\"_blank\">View Location</a>";
+        if(file_exists("../images/".$b['aed_id']."_condition.png")) echo "<br><a href=\"/images/".$b['aed_id']."_condition.jpg\" target=\"_blank\">View Location</a>";
+        echo "</td>
+        <td>
+          Mon: "; if($b['aed_available_mon'] == 1){echo "Not Available";} else { echo date('H:i',strtotime($b['aed_time_mon_start']))." - ".date('H:i',strtotime($b['aed_time_mon_end'])); } echo "<br>
+          Tue: "; if($b['aed_available_tue'] == 1){echo "Not Available";} else { echo date('H:i',strtotime($b['aed_time_tue_start']))." - ".date('H:i',strtotime($b['aed_time_tue_end'])); } echo "<br>
+          Wed: "; if($b['aed_available_wed'] == 1){echo "Not Available";} else { echo date('H:i',strtotime($b['aed_time_wed_start']))." - ".date('H:i',strtotime($b['aed_time_wed_end'])); } echo "<br>
+          Thur: "; if($b['aed_available_thur'] == 1){echo "Not Available";} else { echo date('H:i',strtotime($b['aed_time_thur_start']))." - ".date('H:i',strtotime($b['aed_time_thur_end'])); } echo "<br>
+          Fri: "; if($b['aed_available_fri'] == 1){echo "Not Available";} else { echo date('H:i',strtotime($b['aed_time_fri_start']))." - ".date('H:i',strtotime($b['aed_time_fri_end'])); } echo "<br>
+          Sat: "; if($b['aed_available_sat'] == 1){echo "Not Available";} else { echo date('H:i',strtotime($b['aed_time_sat_start']))." - ".date('H:i',strtotime($b['aed_time_sat_end'])); } echo "<br>
+          Sun: "; if($b['aed_available_sun'] == 1){echo "Not Available";} else { echo date('H:i',strtotime($b['aed_time_sun_start']))." - ".date('H:i',strtotime($b['aed_time_sun_end'])); } echo "
+        </td>
+        <td>".$b['aed_signage']."</td>
+        <td>".$b['aed_make']."</td>
+        <td>".$b['aed_model']."</td>
+        <td>".$b['aed_assettag']."</td>
+        <td>".$b['aed_cemark']."</td>
+        <td>".$b['aed_serialnumber']."</td>
+        <td>".$b['aed_batterystatus']."</td>
+        <td>".$manufacturedate."</td>
+        <td>".$b['aed_registered']."</td>
+        <td>".$b['box_locked']."</td>
+        <td>".$b['box_assettag']."</td>
+        <td>".$b['box_accesscode']."</td>
+        <td>".$b['box_power']."</td>
+        <td>".$b['otherinfo']."</td>
+        <td>".$b['loggedby']."</td>
+      </tr>";
+    }
+  }
+
+  ?>
+</table>
+</div>
+<?php
+
+?>

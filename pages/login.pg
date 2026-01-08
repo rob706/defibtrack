@@ -1,0 +1,46 @@
+<link href="/core/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <script src="/core/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <br>
+<div style="width: 50%">
+    <h2>Login</h2>
+    <br>
+    <form action="/core/login.php" method="post">
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+        <input type="text" id="form2Example1" class="form-control" name="user" />
+        <label class="form-label" for="form2Example1">Username</label>
+    <br>
+        <input type="password" id="form2Example2" class="form-control" name="pass" />
+        <label class="form-label" for="form2Example2">Password</label>
+    </div>
+    <div class="col">
+        <!-- Simple link -->
+        <a href="#!">Forgot password?</a>
+        </div>
+    </div>
+    <br>
+    <!-- Submit button -->
+    <p><button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button></p>
+
+    </form>
+</div>
+<?php
+
+/*
+
+echo "<br><br>";
+echo "David - ".(md5(md5("DPSC1981"."dpsc1981")))."<br>";
+echo "Aly - ".(md5(md5("Smethurst"."dpsc1981")))."<br>";
+echo "Jon - ".(md5(md5("Warrington"."dpsc1981")))."<br>";
+echo "Karen - ".(md5(md5("DPSCShop"."dpsc1981")))."<br>";
+echo "Andrew - ".(md5(md5("Treasurer"."dpsc1981")))."<br>";
+
+David - be57cefb77bae8b765b93ec0fb069665
+Aly - c2e473975990442595e8455b8f85ecc8
+Jon - d7b8445d379e4ff4e042db3338fb8339
+Karen - 3effae7be5039ce9441144fb76fbedd6
+Andrew - fc1d231c222360611f7c5c6c58e8fc49
+
+*/
+
+?>

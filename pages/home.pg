@@ -5,9 +5,12 @@
 $fromd = date("Y-m-d H:i:s", strtotime(date("Y-m-d"))-(60*60*24*7));
 
 $aed = $conn->query("
-  select *
+  select 
+    m.*
+    ,u.name as logged_user
   from
-    aed_machines
+    aed_machines as m
+    inner join users as u on m.loggedby = u.uid
   order by aed_assettag asc
 ");
 ?>
@@ -32,18 +35,25 @@ $aed = $conn->query("
     <td><b>AED Asset Tag</b></td>
     <td><b>CE Mark</b></td>
     <td><b>Serial Number</b></td>
-    <td><b>Battery Status</b></td>
+    <td><b>Battery Status / Bars</b></td>
     <td><b>Manufacture Date</b></td>
     <td><b>Registered on App</b></td>
+    <td><b>Defib Pads</b></td>
     <td><b>Box Locked</b></td>
     <td><b>Box Asset Tag</b></td>
     <td><b>Box Access Code</b></td>
     <td><b>Box Power</b></td>
+    <td><b>Box Rescue Ready Kit</b></td>
     <td><b>Other Info</b></td>
     <td><b>Logged By</b></td>
   </tr>
   <?php
   $nr = $aed->num_rows;
+
+  $array_yn = array('No','Yes');
+  $array_power = array('','Yes - Connected & Turned On','No - Disconnected / Turned Off','No - No Connections');
+  $array_defibpads = array('','Adult','Child','Dual');
+
   if($nr >= 1 ){
     foreach($aed as $b){
 
@@ -52,14 +62,14 @@ $aed = $conn->query("
       echo"<tr class=\"data\">
         <td>".$b['aed_location'];
         if(file_exists("../images/".$b['aed_id']."_location.jpg")) echo "<br><a href=\"/images/".$b['aed_id']."_location.jpg\" target=\"_blank\">View Location</a>";
-        if(file_exists("../images/".$b['aed_id']."_location.jpeg")) echo "<br><a href=\"/images/".$b['aed_id']."_location.jpg\" target=\"_blank\">View Location</a>";
-        if(file_exists("../images/".$b['aed_id']."_location.png")) echo "<br><a href=\"/images/".$b['aed_id']."_location.jpg\" target=\"_blank\">View Location</a>";
+        if(file_exists("../images/".$b['aed_id']."_location.jpeg")) echo "<br><a href=\"/images/".$b['aed_id']."_location.jpeg\" target=\"_blank\">View Location</a>";
+        if(file_exists("../images/".$b['aed_id']."_location.png")) echo "<br><a href=\"/images/".$b['aed_id']."_location.png\" target=\"_blank\">View Location</a>";
         echo "</td>
         <td>".$b['aed_w3w']."</td>
         <td>".$b['aed_condition'];
         if(file_exists("../images/".$b['aed_id']."_condition.jpg")) echo "<br><a href=\"/images/".$b['aed_id']."_condition.jpg\" target=\"_blank\">View Location</a>";
-        if(file_exists("../images/".$b['aed_id']."_condition.jpeg")) echo "<br><a href=\"/images/".$b['aed_id']."_condition.jpg\" target=\"_blank\">View Location</a>";
-        if(file_exists("../images/".$b['aed_id']."_condition.png")) echo "<br><a href=\"/images/".$b['aed_id']."_condition.jpg\" target=\"_blank\">View Location</a>";
+        if(file_exists("../images/".$b['aed_id']."_condition.jpeg")) echo "<br><a href=\"/images/".$b['aed_id']."_condition.jpeg\" target=\"_blank\">View Location</a>";
+        if(file_exists("../images/".$b['aed_id']."_condition.png")) echo "<br><a href=\"/images/".$b['aed_id']."_condition.png\" target=\"_blank\">View Location</a>";
         echo "</td>
         <td>
           Mon: "; if($b['aed_available_mon'] == 1){echo "Not Available";} else { echo date('H:i',strtotime($b['aed_time_mon_start']))." - ".date('H:i',strtotime($b['aed_time_mon_end'])); } echo "<br>
@@ -74,17 +84,24 @@ $aed = $conn->query("
         <td>".$b['aed_make']."</td>
         <td>".$b['aed_model']."</td>
         <td>".$b['aed_assettag']."</td>
-        <td>".$b['aed_cemark']."</td>
+        <td>".$array_yn[$b['aed_cemark']]."</td>
         <td>".$b['aed_serialnumber']."</td>
         <td>".$b['aed_batterystatus']."</td>
         <td>".$manufacturedate."</td>
-        <td>".$b['aed_registered']."</td>
-        <td>".$b['box_locked']."</td>
+        <td>".$array_yn[$b['aed_registered']]."</td>
+        <td>"; 
+          if($b['aed_pads1_type'] != 0){echo $array_defibpads[$b['aed_pads1_type']]." - ".date('Y-m-d',strtotime($b['aed_pads1_expiry'])); }
+          if($b['aed_pads2_type'] != 0){echo "<br>".$array_defibpads[$b['aed_pads2_type']]." - ".date('Y-m-d',strtotime($b['aed_pads2_expiry'])); }
+          if($b['aed_pads3_type'] != 0){echo "<br>".$array_defibpads[$b['aed_pads3_type']]." - ".date('Y-m-d',strtotime($b['aed_pads3_expiry'])); }
+          if($b['aed_pads4_type'] != 0){echo "<br>".$array_defibpads[$b['aed_pads4_type']]." - ".date('Y-m-d',strtotime($b['aed_pads4_expiry'])); }
+        echo "</td>
+        <td>".$array_yn[$b['box_locked']]."</td>
         <td>".$b['box_assettag']."</td>
         <td>".$b['box_accesscode']."</td>
-        <td>".$b['box_power']."</td>
+        <td>".$array_power[$b['box_power']]."</td>
+        <td>".$array_yn[$b['box_rescuereadykit']]."</td>
         <td>".$b['otherinfo']."</td>
-        <td>".$b['loggedby']."</td>
+        <td>".$b['logged_user']."<br>".$b['logged']."</td>
       </tr>";
     }
   }

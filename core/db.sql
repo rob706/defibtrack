@@ -54,12 +54,22 @@ CREATE TABLE `aed_machines` (
   `aed_batterystatus` text DEFAULT NULL,
   `aed_manufacturedate` date DEFAULT NULL,
   `aed_registered` tinyint(1) DEFAULT 0,
+  `aed_pads1_type` tinyint(1) DEFAULT 0,
+  `aed_pads1_expiry` date DEFAULT NULL,
+  `aed_pads2_type` tinyint(1) DEFAULT 0,
+  `aed_pads2_expiry` date DEFAULT NULL,
+  `aed_pads3_type` tinyint(1) DEFAULT 0,
+  `aed_pads3_expiry` date DEFAULT NULL,
+  `aed_pads4_type` tinyint(1) DEFAULT 0,
+  `aed_pads4_expiry` date DEFAULT NULL,
   `box_locked` tinyint(1) DEFAULT 0,
   `box_assettag` text DEFAULT NULL,
   `box_accesscode` text DEFAULT NULL,
   `box_power` tinyint(1) DEFAULT 3,
+  `box_rescuereadykit` tinyint(1) DEFAULT 0,
   `otherinfo` text DEFAULT NULL,
   `loggedby` int(11) NOT NULL,
+  `logged` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY (`aed_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

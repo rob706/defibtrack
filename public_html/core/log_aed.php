@@ -9,9 +9,9 @@ print_r($_POST);
 echo "<br><br>";
 print_r($_FILES);
 
-$aed_location = $aed_w3w = $aed_condition = $mon_start = $mon_end = $tue_start = $tue_end = $wed_start = $wed_end = $thur_start = $thur_end = $fri_start = $fri_end = $sat_start = $sat_end = $sun_start = $sun_end = $aed_signage = $aed_make = $aed_model = $aed_assettag = $aed_serialnumber = $aed_batterystatus = $aed_manufacturedate = $box_assettag = $box_accesscode = $box_power = $otherinfo = $loggedby = "";
+$aed_location = $aed_w3w = $aed_condition = $mon_start = $mon_end = $tue_start = $tue_end = $wed_start = $wed_end = $thur_start = $thur_end = $fri_start = $fri_end = $sat_start = $sat_end = $sun_start = $sun_end = $aed_signage = $aed_make = $aed_model = $aed_assettag = $aed_serialnumber = $aed_batterystatus = $aed_manufacturedate = $box_assettag = $box_accesscode = $box_power = $otherinfo = $loggedby = $aed_pads1_expiry = $aed_pads2_expiry = $aed_pads3_expiry = $aed_pads4_expiry = "";
 
-$available_mon = $available_tue = $available_wed = $available_thur = $available_fri = $available_sat = $available_sun = $aed_cemark = $aed_registered = $box_locked = 0;
+$available_mon = $available_tue = $available_wed = $available_thur = $available_fri = $available_sat = $available_sun = $aed_cemark = $aed_registered = $box_locked = $box_rescuereadykit = $aed_pads1_type = $aed_pads2_type = $aed_pads3_type = $aed_pads4_type = 0;
 
 if(!empty($_POST['aed_location']))          $aed_location = $conn_update->real_escape_string($_POST['aed_location']);
 if(!empty($_POST['aed_w3w']))               $aed_w3w = $conn_update->real_escape_string($_POST['aed_w3w']);
@@ -46,10 +46,19 @@ if(!empty($_POST['aed_serialnumber']))      $aed_serialnumber = $conn_update->re
 if(!empty($_POST['aed_batterystatus']))     $aed_batterystatus = $conn_update->real_escape_string($_POST['aed_batterystatus']);
 if(!empty($_POST['aed_manufacturedate']))   $aed_manufacturedate = $conn_update->real_escape_string($_POST['aed_manufacturedate']);
 if(!empty($_POST['aed_registered']))        $aed_registered = $conn_update->real_escape_string($_POST['aed_registered']);
+if(!empty($_POST['aed_pads1_type']))        $aed_pads1_type = $conn_update->real_escape_string($_POST['aed_pads1_type']);
+if(!empty($_POST['aed_pads2_type']))        $aed_pads2_type = $conn_update->real_escape_string($_POST['aed_pads2_type']);
+if(!empty($_POST['aed_pads3_type']))        $aed_pads3_type = $conn_update->real_escape_string($_POST['aed_pads3_type']);
+if(!empty($_POST['aed_pads4_type']))        $aed_pads4_type = $conn_update->real_escape_string($_POST['aed_pads4_type']);
+if(!empty($_POST['aed_pads1_expiry']))        $aed_pads1_expiry = $conn_update->real_escape_string($_POST['aed_pads1_expiry']);
+if(!empty($_POST['aed_pads2_expiry']))        $aed_pads2_expiry = $conn_update->real_escape_string($_POST['aed_pads2_expiry']);
+if(!empty($_POST['aed_pads3_expiry']))        $aed_pads3_expiry = $conn_update->real_escape_string($_POST['aed_pads3_expiry']);
+if(!empty($_POST['aed_pads4_expiry']))        $aed_pads4_expiry = $conn_update->real_escape_string($_POST['aed_pads4_expiry']);
 if(!empty($_POST['box_locked']))            $box_locked = $conn_update->real_escape_string($_POST['box_locked']);
 if(!empty($_POST['box_assettag']))          $box_assettag = $conn_update->real_escape_string($_POST['box_assettag']);
 if(!empty($_POST['box_accesscode']))        $box_accesscode = $conn_update->real_escape_string($_POST['box_accesscode']);
 if(!empty($_POST['box_power']))             $box_power = $conn_update->real_escape_string($_POST['box_power']);
+if(!empty($_POST['box_rescuereadykit']))    $box_rescuereadykit = $conn_update->real_escape_string($_POST['box_rescuereadykit']);
 if(!empty($_POST['otherinfo']))             $otherinfo = $conn_update->real_escape_string($_POST['otherinfo']);
 $loggedby = $_SESSION['uid'];
 
@@ -64,6 +73,11 @@ if($available_sun == "on") $available_sun = 1;
 if($aed_cemark == "on") $aed_cemark = 1;
 if($aed_registered == "on") $aed_registered = 1;
 if($box_locked == "on") $box_locked = 1;
+
+if($aed_pads1_expiry == "") {$aed_pads1_expiry = "Null";} else {$aed_pads1_expiry = "'".$aed_pads1_expiry."'";}
+if($aed_pads2_expiry == "") {$aed_pads2_expiry = "Null";} else {$aed_pads2_expiry = "'".$aed_pads2_expiry."'";}
+if($aed_pads3_expiry == "") {$aed_pads3_expiry = "Null";} else {$aed_pads3_expiry = "'".$aed_pads3_expiry."'";}
+if($aed_pads4_expiry == "") {$aed_pads4_expiry = "Null";} else {$aed_pads4_expiry = "'".$aed_pads4_expiry."'";}
 
 $conn_update->query("
     insert into aed_machines
@@ -101,10 +115,19 @@ $conn_update->query("
             `aed_batterystatus`,
             `aed_manufacturedate`,
             `aed_registered`,
+            `aed_pads1_type`,
+            `aed_pads1_expiry`,
+            `aed_pads2_type`,
+            `aed_pads2_expiry`,
+            `aed_pads3_type`,
+            `aed_pads3_expiry`,
+            `aed_pads4_type`,
+            `aed_pads4_expiry`,
             `box_locked`,
             `box_assettag`,
             `box_accesscode`,
             `box_power`,
+            `box_rescuereadykit`,
             `otherinfo`,
             `loggedby`
         ) 
@@ -143,10 +166,19 @@ $conn_update->query("
             '".$aed_batterystatus."',
             '".$aed_manufacturedate."',
             '".$aed_registered."',
+            '".$aed_pads1_type."',
+            ".$aed_pads1_expiry.",
+            '".$aed_pads2_type."',
+            ".$aed_pads2_expiry.",
+            '".$aed_pads3_type."',
+            ".$aed_pads3_expiry.",
+            '".$aed_pads4_type."',
+            ".$aed_pads4_expiry.",
             '".$box_locked."',
             '".$box_assettag."',
             '".$box_accesscode."',
             '".$box_power."',
+            '".$box_rescuereadykit."',
             '".$otherinfo."',
             '".$loggedby."'
         )

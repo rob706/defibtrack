@@ -70,10 +70,7 @@
     <td>AED Model</td>
     <td><input name="aed_model"></td>
   </tr>
-  <tr>
-    <td>AED CE Mark</td>
-    <td><input type="checkbox" name="aed_cemark"></td>
-  </tr>
+  
   <tr>
     <td>AED Asset Tag</td>
     <td><input name="aed_assettag"></td>
@@ -83,16 +80,75 @@
     <td><input name="aed_serialnumber"></td>
   </tr>
   <tr>
-    <td>AED Battery Status</td>
+    <td>AED Manufacture Date</td>
+    <td><input name="aed_manufacturedate" type="date" max="<?php echo date('Y-m-d'); ?>" value="<?php echo date('Y-m-d'); ?>"></td>
+  </tr>
+  <tr>
+    <td>AED CE Mark</td>
+    <td>
+      <select name="aed_cemark">
+        <option value="1">Yes</option>
+        <option value="0" selected>No</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td>AED Battery Status / Bars</td>
     <td><input name="aed_batterystatus"></td>
   </tr>
   <tr>
-    <td>AED Manufacture Date</td>
-    <td><input name="aed_manufacturedate" type="date" min="<?php echo date('Y-m-d'); ?>" value="<?php echo date('Y-m-d'); ?>"></td>
+    <td>AED Registered on App</td>
+    <td>
+      <select name="aed_registered">
+        <option value="1">Yes</option>
+        <option value="0" selected>No</option>
+      </select>
+    </td>
+  </tr>
+   <tr>
+    <td rowspan="4">Defib Pads</td>
+    <td>Type: 
+      <select name="aed_pads1_type">
+        <option value="0">-</option>
+        <option value="1">Adult</option>
+        <option value="2">Child</option>
+        <option value="3">Duel</option>
+      </select>
+      | Expiry Date: <input name="aed_pads1_expiry" type="date" min="<?php echo date('Y-m-d'); ?>">
+    </td>
   </tr>
   <tr>
-    <td>AED Registered on App</td>
-    <td><input type="checkbox" name="aed_registered"></td>
+    <td>Type: 
+      <select name="aed_pads2_type">
+        <option value="0">-</option>
+        <option value="1">Adult</option>
+        <option value="2">Child</option>
+        <option value="3">Duel</option>
+      </select>
+      | Expiry Date: <input name="aed_pads2_expiry" type="date" min="<?php echo date('Y-m-d'); ?>">
+    </td>
+  </tr>
+  <tr>
+    <td>Type: 
+      <select name="aed_pads3_type">
+        <option value="0">-</option>
+        <option value="1">Adult</option>
+        <option value="2">Child</option>
+        <option value="3">Duel</option>
+      </select>
+      | Expiry Date: <input name="aed_pads3_expiry" type="date" min="<?php echo date('Y-m-d'); ?>">
+    </td>
+  </tr>
+  <tr>
+    <td>Type: 
+      <select name="aed_pads4_type">
+        <option value="0">-</option>
+        <option value="1">Adult</option>
+        <option value="2">Child</option>
+        <option value="3">Duel</option>
+      </select>
+      | Expiry Date: <input name="aed_pads4_expiry" type="date" min="<?php echo date('Y-m-d'); ?>">
+    </td>
   </tr>
   <tr>
     <td>Box Asset Tag</td>
@@ -100,7 +156,12 @@
   </tr>
   <tr>
     <td>Box Locked</td>
-    <td><input type="checkbox" name="box_locked"></td>
+    <td>
+      <select name="box_locked">
+        <option value="1">Yes</option>
+        <option value="0" selected>No</option>
+      </select>
+    </td>
   </tr>
   <tr>
     <td>Box Access Code (If Applicable)</td>
@@ -117,12 +178,21 @@
     </td>
   </tr>
   <tr>
+    <td>CPR Rescue Ready Kit</td>
+    <td>
+      <select name="box_rescuereadykit">
+        <option value="1">Yes</option>
+        <option value="0" selected>No</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
     <td>Any Other Info<br>
     e.g. Installed Outside On South Facing Wall</td>
     <td><textarea name="otherinfo"></textarea></td>
   </tr>
   <tr>
-    <td colspan="2" style="text-align: center;"><button type="submit" class="btn btn-sm btn-outline-secondary">Add AED</button></td>
+    <td colspan="2" style="text-align: center;"><button type="submit" class="btn btn-sm btn-danger">Add AED</button></td>
   </tr>
 </table>
 </form>

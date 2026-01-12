@@ -13,7 +13,7 @@ CREATE TABLE `users` (
 
   PRIMARY KEY (`uid`),
   UNIQUE KEY `uname` (`uname`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 
 --
 -- Table structure for table `aed_machines`
@@ -74,5 +74,5 @@ CREATE TABLE `aed_machines` (
   `logged` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY (`aed_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 

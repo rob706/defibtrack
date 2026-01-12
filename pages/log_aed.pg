@@ -118,7 +118,7 @@
         <option value="2">Child</option>
         <option value="3">Duel</option>
       </select>
-      | Expiry Date: <input name="aed_pads1_expiry" type="date" min="<?php echo date('Y-m-d'); ?>">
+      | Expiry Date: <input name="aed_pads1_expiry" type="date"> <?php /*  min="<?php echo date('Y-m-d'); ?>"*/ ?>
     </td>
   </tr>
   <tr>
@@ -129,7 +129,7 @@
         <option value="2">Child</option>
         <option value="3">Duel</option>
       </select>
-      | Expiry Date: <input name="aed_pads2_expiry" type="date" min="<?php echo date('Y-m-d'); ?>">
+      | Expiry Date: <input name="aed_pads2_expiry" type="date"> <?php /*  min="<?php echo date('Y-m-d'); ?>"*/ ?>
     </td>
   </tr>
   <tr>
@@ -140,7 +140,7 @@
         <option value="2">Child</option>
         <option value="3">Duel</option>
       </select>
-      | Expiry Date: <input name="aed_pads3_expiry" type="date" min="<?php echo date('Y-m-d'); ?>">
+      | Expiry Date: <input name="aed_pads3_expiry" type="date"> <?php /*  min="<?php echo date('Y-m-d'); ?>"*/ ?>
     </td>
   </tr>
   <tr>
@@ -151,7 +151,7 @@
         <option value="2">Child</option>
         <option value="3">Duel</option>
       </select>
-      | Expiry Date: <input name="aed_pads4_expiry" type="date" min="<?php echo date('Y-m-d'); ?>">
+      | Expiry Date: <input name="aed_pads4_expiry" type="date"> <?php /*  min="<?php echo date('Y-m-d'); ?>"*/ ?>
     </td>
   </tr>
   <tr>

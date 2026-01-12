@@ -82,12 +82,14 @@ if($nr != 0){
                 <span data-feather="home" class="align-text-bottom"></span>
                 Home
               </a>
+              <br><br>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/log_aed.htm">
                 <span data-feather="compass" class="align-text-bottom"></span>
                 Log AED
               </a>
+              <br><br>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/core/login.php">

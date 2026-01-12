@@ -84,6 +84,10 @@
     <td><input name="aed_manufacturedate" type="date" max="<?php echo date('Y-m-d'); ?>" value="<?php echo date('Y-m-d'); ?>"></td>
   </tr>
   <tr>
+    <td>AED Battery Manufacture Date</td>
+    <td><input name="aed_battery_manufacturedate" type="date" max="<?php echo date('Y-m-d'); ?>" value="<?php echo date('Y-m-d'); ?>"></td>
+  </tr>
+  <tr>
     <td>AED CE Mark</td>
     <td>
       <select name="aed_cemark">
@@ -181,6 +185,15 @@
     <td>CPR Rescue Ready Kit</td>
     <td>
       <select name="box_rescuereadykit">
+        <option value="1">Yes</option>
+        <option value="0" selected>No</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td>AED Service Contract</td>
+    <td>
+      <select name="aed_servicecontract">
         <option value="1">Yes</option>
         <option value="0" selected>No</option>
       </select>

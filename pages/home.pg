@@ -36,7 +36,8 @@ $aed = $conn->query("
     <td><b>CE Mark</b></td>
     <td><b>Serial Number</b></td>
     <td><b>Battery Status / Bars</b></td>
-    <td><b>Manufacture Date</b></td>
+    <td><b>AED Manufacture Date</b></td>
+    <td><b>Battery Manufacture Date</b></td>
     <td><b>Registered on App</b></td>
     <td><b>Defib Pads</b></td>
     <td><b>Box Locked</b></td>
@@ -44,6 +45,7 @@ $aed = $conn->query("
     <td><b>Box Access Code</b></td>
     <td><b>Box Power</b></td>
     <td><b>Box Rescue Ready Kit</b></td>
+    <td><b>Service Contract</b></td>
     <td><b>Other Info</b></td>
     <td><b>Logged By</b></td>
   </tr>
@@ -58,6 +60,7 @@ $aed = $conn->query("
     foreach($aed as $b){
 
       $manufacturedate = date("Y-m-d", strtotime($b['aed_manufacturedate']));
+      $battery_manufacturedate = date("Y-m-d", strtotime($b['aed_battery_manufacturedate']));
 
       echo"<tr class=\"data\">
         <td>".$b['aed_location'];
@@ -88,6 +91,7 @@ $aed = $conn->query("
         <td>".$b['aed_serialnumber']."</td>
         <td>".$b['aed_batterystatus']."</td>
         <td>".$manufacturedate."</td>
+        <td>".$b['aed_battery_manufacturedate']."</td>
         <td>".$array_yn[$b['aed_registered']]."</td>
         <td>"; 
           if($b['aed_pads1_type'] != 0){echo $array_defibpads[$b['aed_pads1_type']]." - ".date('Y-m-d',strtotime($b['aed_pads1_expiry'])); }
@@ -100,6 +104,7 @@ $aed = $conn->query("
         <td>".$b['box_accesscode']."</td>
         <td>".$array_power[$b['box_power']]."</td>
         <td>".$array_yn[$b['box_rescuereadykit']]."</td>
+        <td>".$array_yn[$b['aed_servicecontract']]."</td>
         <td>".$b['otherinfo']."</td>
         <td>".$b['logged_user']."<br>".$b['logged']."</td>
       </tr>";

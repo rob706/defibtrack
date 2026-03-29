@@ -5,6 +5,11 @@ session_start();
 @require_once("../core/config.php");
 #@require_once("core/functions.php");
 
+if($_SERVER['SERVER_NAME'] != $mainurl && substr($_SERVER['SERVER_NAME'],0,3) != "127"){
+  header("location: https://".$mainurl,301);
+  exit();
+}
+
 $uid = $name = $level = "";
 
 $uid = @$_SESSION['uid'];

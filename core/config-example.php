@@ -1,5 +1,11 @@
 <?php
 
+## Environment Settings ##
+
+$mainurl = "xxx";
+
+## DB Settings ##
+
 $server = "localhost";
 $db = "xxx";
 

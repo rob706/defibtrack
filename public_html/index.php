@@ -56,7 +56,7 @@ if($nr != 0){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <title>Debib Tracker</title>
+    <title>Find A Defib</title>
 
     <link href="/core/css/modal.css" rel="stylesheet">
     <link href="/core/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -66,7 +66,7 @@ if($nr != 0){
   <body>
     
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Defib Tracker</a>
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="/">Find a Defib</a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -79,21 +79,18 @@ if($nr != 0){
           <ul class="nav flex-column">
             <li class="nav-item">
               <a class="nav-link" href="/">
-                <span data-feather="home" class="align-text-bottom"></span>
                 Home
               </a>
               <br><br>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/log_aed.htm">
-                <span data-feather="compass" class="align-text-bottom"></span>
                 Log AED
               </a>
               <br><br>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/core/login.php">
-                <span data-feather="calendar" class="align-text-bottom"></span>
                 Sign Out
               </a>
             </li>
